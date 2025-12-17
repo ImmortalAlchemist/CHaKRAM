@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHaKRAM v1</title>
+    <title>CHaKRAM v1.1</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
-<body id="screen" bgcolor="white" background="images/score_NULL.png">
+<body id="screen" bgcolor="#ffffff" background="images/score_NULL.png">
     
     <h1 id="title">
-        CH<img src="images\icon.png">KRAM
+        CH<img src="images\icon_affix.png">KRAM
     </h1>
 
     <img id="PC"
@@ -41,7 +41,9 @@
             x1="0" x2="0" y1="0" y2="0" stroke="black"></line> -->
         
         <!-- enemies -->
-        <circle id="enem9" x="177" y="13" fill="red"></circle>
+        <circle id="enem9" r="16" cx="177" cy="130" fill="red">
+            <circle r="170" cx="177" cy="130" fill="black"></circle>
+        </circle>
     </svg>
 
 </body>

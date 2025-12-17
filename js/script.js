@@ -30,6 +30,7 @@ let moves = 0;
 
 //ON START
 document.addEventListener("DOMContentLoaded", () => {
+
   //initialize variables
   document.getElementById("PC").setAttribute("height", (playersize + "px"));
   document.getElementById("PC").setAttribute("width", (playersize + "px"));
@@ -40,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   maxPlaceableY = maxY - 32;
 
 
-  //play field size
+  //set play field size
   document.getElementById("trails").setAttribute("viewBox", "0 0 " + maxX + " " + maxY);
   
 
@@ -52,6 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
     enemies.push([enemX, enemY]);
 
     const newEnem = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+
+    //enemy attributes
     newEnem.setAttribute("r", 16);
     newEnem.setAttribute("cx", enemX);
     newEnem.setAttribute("cy", enemY);
@@ -131,6 +134,11 @@ function checkCollisions(preX, preY, newX, newY)
   enemies.forEach(enem => {
     if (doesLineInterceptCircle([preX+16, preY+16], [newX+16, newY+16], enem, 16)) {
       coll += 1;
+      //document.querySelector("circle [cx='" + CSS.escape(enem[0]) + "']").style.display = "none";
+      //console.log(document.querySelector("circle [cx='" + CSS.escape(enem[0]) + "']"));
+      // console.log(enemies[enemies.indexOf(enem)]);
+      // console.log(document.getElementById("enem" + enemies.indexOf(enem)));
+
       enem = [-32, -32];
     }
   });

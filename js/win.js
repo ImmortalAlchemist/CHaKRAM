@@ -7,9 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
   //variables
   score = sessionStorage.getItem("moves");
 
-  //score
-  moveScore.textContent = "In " + score + " moves!";
-  sessionStorage.clear();
+  if (score != null) {
+    //score
+    moveScore.textContent = "In " + score + " moves!";
+    sessionStorage.clear();
 
-  console.log("Win DOM Loaded");
+    console.log("Win DOM Loaded");
+  }
+  else {
+    window.location.href = "index.html";
+  }
 })
