@@ -1,0 +1,29 @@
+/* player */
+#PC {
+    position: absolute;
+}
+
+/* #enem {
+    fill: red;
+} */
+
+#title {
+    display: block;
+    position: absolute;
+    font-size: 40px;
+}
+
+
+#trails {
+    position: absolute;
+
+    clear: both;
+}
+#playfield {
+    position: absolute;
+
+    width: 640px;
+    height: 320px;
+
+    clear: both;
+}
