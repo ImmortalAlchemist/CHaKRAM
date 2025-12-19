@@ -1,19 +1,29 @@
 /*
 
-### CHaKRAM v1.1
-This is a bare HTML game controlled with your mouse.
+### CHaKRAM v1.1.1
+This is a bare HTML game that made without using the HTML canvas, it's controlled with your mouse.
 Run through all 10 enemies in as few moves as possible.
 
+### Todo
+
 #### Bugs
-* [0] Destroy enemies on collision
-* [0] Center collision point in circle
+* [0] Enemies aren't destroyed on collision
+* [0] Collision point drifts from the center (SVG object isn't scaled correctly?)
 
 #### Features
-* [0] Auto movement with background color changing
 * [0] Sound effects on move, hit, multi-hit, win
-* [0] Randomization validation
-* [0] Randomization is seed-based, daily seed
+* [0] Auto movement with background color changing
+* [0] Randomization validation //no enemies inside each other or on title
+
+#### Possible Features
+* [0] Seed-based randomization, daily seed
 * [0] Local storage high score
+* [0] Track time?
+
+#### Bad Practice
+* [2] Use of deprecated traits
+ * [1] Element.hspace & vspace  //could probably do without, might change to CSS left and top
+ * [1] Background.bgcolor       //might not be able to manipulate another way?
 
 
 ### AI Disclosure & Outside Assets

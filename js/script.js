@@ -10,21 +10,25 @@ const line1 = document.getElementById("line1");
 // const line7 = document.getElementById("line7");
 // const line8 = document.getElementById("line8");
 
+//player variables
 let playersize = 32;
+let line1OffsetX = 7;
+let line1OffsetY = 3;
 
+//svg canvas size
 let maxX = 640;
 let maxY = 320;
-
 let maxPlaceableX = maxX - 32;
 let maxPlaceableY = maxY - 32;
 
-let enemies = [[177, 13]];
+let enemies = [[177, 130]];
 
-//game vars
+//game variabless
 let score = 0;
 let moves = 0;
 
-
+let mouseX = null;
+let mouseY = null;
 
 
 
@@ -32,9 +36,11 @@ let moves = 0;
 document.addEventListener("DOMContentLoaded", () => {
 
   //initialize variables
+  //player size
   document.getElementById("PC").setAttribute("height", (playersize + "px"));
   document.getElementById("PC").setAttribute("width", (playersize + "px"));
 
+  //set canvas size to screen size (not perfectly tho)
   maxX = window.innerWidth;
   maxY = window.innerHeight;
   maxPlaceableX = maxX - 32;
@@ -48,23 +54,27 @@ document.addEventListener("DOMContentLoaded", () => {
   //add enemies
   for (let i = 0; i < 9; i++)
   {
+    //random position
     let enemX = Math.floor(Math.random() * (maxPlaceableX - 32)) + 32;
     let enemY = Math.floor(Math.random() * (maxPlaceableY - 32)) + 32;
+
+    //push XY to enemy position array
     enemies.push([enemX, enemY]);
 
+    //instantiating the enemy object
     const newEnem = document.createElementNS("http://www.w3.org/2000/svg", "circle")
-
-    //enemy attributes
     newEnem.setAttribute("r", 16);
     newEnem.setAttribute("cx", enemX);
     newEnem.setAttribute("cy", enemY);
     newEnem.setAttribute("fill", "red");
 
-
+    //placing the object in scene (the anchor object could be anything in the svg)
     const currentEnem = document.getElementById("enem9");
     currentEnem.insertAdjacentElement("afterend", newEnem);
     newEnem.setAttribute("id", "enem" + i);
   }
+
+  //DEBUG, show enemy positions
   console.log(enemies);
 
   console.log("DOM Loaded");
@@ -72,40 +82,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+//ON MOUSE MOVE
+document.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
 
-
-//ON MOVE
+//ON CLICK
 document.addEventListener("mousedown", movePlayer);
-function movePlayer(e)
+
+//ON MOVE, its own function cause we'll trigger this elsewhere
+function movePlayer()
 {
   //increase moves
   moves += 1;
+  
   //on first move, hide title
   if (moves == 1)
   {
     document.getElementById("title").style.display = "none";
   }
 
-  //debug
-  console.log('Mouse X: ' + e.clientX + '\nMouse Y: ' + e.clientY);
+  //DEBUG, show mouse position
+  console.log('Mouse X: ' + mouseX + '\nMouse Y: ' + mouseY);
 
-  //movement variables
-  let newX = e.clientX - (playersize - 8);
-  let newY = e.clientY - (playersize - 8);
-  //get pre-movement X/Y
+  //pre-movement X/Y
   let preX = parseInt(player.getAttribute("hspace"));
   let preY = parseInt(player.getAttribute("vspace"));
+  //post-movement X/Y
+  let newX = mouseX - (playersize - 8);
+  let newY = mouseY - (playersize - 8);
 
   //move player
   player.setAttribute("hspace", newX)
   player.setAttribute("vspace", newY)
 
-  //display line
+  //display collision line
   line1.setAttribute("x1", preX + 16);
   line1.setAttribute("y1", preY + 16);
-  line1.setAttribute("x2", newX + 16);
-  line1.setAttribute("y2", newY + 16);
- 
+  line1.setAttribute("x2", newX + 16 + line1OffsetX);
+  line1.setAttribute("y2", newY + 16 + line1OffsetY);
+
   //collisions
   let collisions = checkCollisions(preX, preY, newX, newY);
   console.log("collisions: " + collisions);
@@ -139,7 +156,7 @@ function checkCollisions(preX, preY, newX, newY)
       // console.log(enemies[enemies.indexOf(enem)]);
       // console.log(document.getElementById("enem" + enemies.indexOf(enem)));
 
-      enem = [-32, -32];
+      enem = [-3200, -3200];
     }
   });
   
